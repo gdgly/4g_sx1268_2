@@ -36,6 +36,8 @@ etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4
 etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
 etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
 etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 etc_project\radio.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 etc_project\radio.o: ..\User\RF\sx126x\sx126x.h
 etc_project\radio.o: ..\User\RF\sx126x\sx126x_hal.h

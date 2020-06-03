@@ -43,6 +43,8 @@ etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 etc_project\freertos.o: C:/Users/Administrator/STM32Cube/Repository/STM32Cube_FW_F4_V1.25.0/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h

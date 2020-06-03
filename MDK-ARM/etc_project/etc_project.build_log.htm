@@ -22,25 +22,27 @@ Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
 C:\work\500M_Prj\sx1268_prj_v1\MDK-ARM\etc_project.uvprojx
-Project File Date:  04/02/2020
+Project File Date:  05/28/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'etc_project'
-compiling sx126x_hal.c...
-compiling sx126x.c...
-compiling radio.c...
-..\User\RF\sx126x\radio.c(566): warning:  #177-D: variable "rssi"  was declared but never referenced
-      int16_t rssi = 0;
-..\User\RF\sx126x\radio.c(567): warning:  #177-D: variable "carrierSenseTime"  was declared but never referenced
-      uint32_t carrierSenseTime = 0;
-..\User\RF\sx126x\radio.c(1120): warning:  #188-D: enumerated type mixed with another type
-                  RadioEvents->CadDone( ( ( irqRegs & IRQ_CAD_ACTIVITY_DETECTED ) == IRQ_CAD_ACTIVITY_DETECTED ) );
-..\User\RF\sx126x\radio.c: 3 warnings, 0 errors
+compiling 4G_app.c...
+..\User\4G\4G_app.c(324): warning:  #61-D: integer operation result is out of range
+  	ip_port[0].ip = (219<<24)|(239<<16)|(83<<8)|74;
+..\User\4G\4G_app.c(325): warning:  #61-D: integer operation result is out of range
+  	ip_port[1].ip = (219<<24)|(239<<16)|(83<<8)|74;
+..\User\4G\4G_app.c(326): warning:  #61-D: integer operation result is out of range
+  	ip_port[2].ip = (219<<24)|(239<<16)|(83<<8)|74;
+..\User\4G\4G_app.c(595): warning:  #177-D: variable "i"  was declared but never referenced
+  	uint8_t i;
+..\User\4G\4G_app.c(438): warning:  #177-D: function "gps_handle"  was declared but never referenced
+  uint8_t gps_handle(void)
+..\User\4G\4G_app.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=24856 RO-data=540 RW-data=148 ZI-data=29820  
+Program Size: Code=40420 RO-data=1364 RW-data=1228 ZI-data=149324  
 FromELF: creating hex file...
-"etc_project\etc_project.axf" - 0 Error(s), 3 Warning(s).
+"etc_project\etc_project.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,7 +65,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.2
-Build Time Elapsed:  00:00:27
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>

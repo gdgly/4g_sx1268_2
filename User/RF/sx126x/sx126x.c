@@ -78,27 +78,37 @@ void SX126xSetInterruptMode( void );
  * \brief Process the IRQ if handled by the driver
  */
 void SX126xProcessIrqs( void );
-
-
+//#define USE_TCXO
+RadioStatus_t RadioStatus;
 void SX126xInit( DioIrqHandler dioIrq )
 {
+		init_io_spi_sx126x_x();
+	
     SX126xReset( );
 
     //SX126xIoIrqInit( dioIrq );
+	 
 
     SX126xWakeup( );
+//	SX126xSetRegulatorMode(USE_DCDC);
+//	RadioStatus = SX126xGetStatus(  );
     SX126xSetStandby( STDBY_RC );
-
+//	 SX126xSetFs();
+//		RadioStatus = SX126xGetStatus(  );
 #ifdef USE_TCXO
     CalibrationParams_t calibParam;
 
-    SX126xSetDio3AsTcxoCtrl( TCXO_CTRL_1_7V, RADIO_TCXO_SETUP_TIME << 6 ); // convert from ms to SX126x time base
+    SX126xSetDio3AsTcxoCtrl( TCXO_CTRL_1_8V, RADIO_TCXO_SETUP_TIME << 6 ); // convert from ms to SX126x time base
     calibParam.Value = 0x7F;
     SX126xCalibrate( calibParam );
 #endif
 
     SX126xSetDio2AsRfSwitchCtrl( True );
+	SX126xSetStandby( STDBY_RC );
+//	RadioStatus = SX126xGetStatus(  );
+	
     OperatingMode = MODE_STDBY_RC;
+	
 }
 
 RadioOperatingModes_t SX126xGetOperatingMode( void )
@@ -477,6 +487,7 @@ void SX126xSetTxParams( int8_t power, RadioRampTimes_t rampTime )
     }
     else // sx1262
     {
+				SX126xWriteRegister( 0x08D8, SX126xReadRegister( 0x08D8 ) | ( 0x0F << 1 ) );
         SX126xSetPaConfig( 0x04, 0x07, 0x00, 0x01 );
         if( power > 22 )
         {
