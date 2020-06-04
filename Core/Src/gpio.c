@@ -73,7 +73,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(EN_1_8V_GPIO_Port, EN_1_8V_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOH, RF1_PWR_EN_Pin|RF2_PWR_EN_Pin|DATA2_Pin|DATA1_Pin 
+  HAL_GPIO_WritePin(GPIOH, RF2_PWR_EN_Pin|RF1_PWR_EN_Pin|DATA2_Pin|DATA1_Pin 
                           |S7_R_Pin|S7_G_Pin|S6_R_Pin|S6_G_Pin 
                           |S4_R_Pin|S4_G_Pin|S3_R_Pin, GPIO_PIN_SET);
 
@@ -99,11 +99,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOG, SYS_R_Pin|SYS_G_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PEPin PEPin PEPin PEPin 
-                           PEPin PEPin PEPin PEPin 
-                           PEPin */
-  GPIO_InitStruct.Pin = RF1_RESET_Pin|RF1_NSS_Pin|WDI_Pin|LD0_Pin 
-                          |DATA7_Pin|DATA6_Pin|DATA5_Pin|DATA4_Pin 
-                          |DATA3_Pin;
+                           PEPin PEPin PEPin PEPin */
+  GPIO_InitStruct.Pin = RF1_RESET_Pin|RF1_NSS_Pin|LD0_Pin|DATA7_Pin 
+                          |DATA6_Pin|DATA5_Pin|DATA4_Pin|DATA3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -182,7 +180,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PHPin PHPin */
-  GPIO_InitStruct.Pin = RF1_PWR_EN_Pin|RF2_PWR_EN_Pin;
+  GPIO_InitStruct.Pin = RF2_PWR_EN_Pin|RF1_PWR_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -216,6 +214,13 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = WDI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(WDI_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PHPin PHPin PHPin PHPin 
                            PHPin PHPin PHPin PHPin 

@@ -83,15 +83,11 @@ RadioStatus_t RadioStatus;
 void SX126xInit( DioIrqHandler dioIrq )
 {
 		init_io_spi_sx126x_x();
-	
+		
     SX126xReset( );
 
     //SX126xIoIrqInit( dioIrq );
 	 
-
-    SX126xWakeup( );
-//	SX126xSetRegulatorMode(USE_DCDC);
-//	RadioStatus = SX126xGetStatus(  );
     SX126xSetStandby( STDBY_RC );
 //	 SX126xSetFs();
 //		RadioStatus = SX126xGetStatus(  );
@@ -104,9 +100,7 @@ void SX126xInit( DioIrqHandler dioIrq )
 #endif
 
     SX126xSetDio2AsRfSwitchCtrl( True );
-	SX126xSetStandby( STDBY_RC );
-//	RadioStatus = SX126xGetStatus(  );
-	
+
     OperatingMode = MODE_STDBY_RC;
 	
 }
@@ -435,6 +429,7 @@ void SX126xSetRfFrequency( uint32_t frequency )
     uint8_t buf[4];
     uint32_t freq = 0;
 
+	  ImageCalibrated = True;
     if( ImageCalibrated == False )
     {
         SX126xCalibrateImage( frequency );

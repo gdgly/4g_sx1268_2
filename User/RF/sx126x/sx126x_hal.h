@@ -42,7 +42,7 @@ extern SX126x_t *p_sx126x;
 #define USE_RF_2 do{p_sx126x = &sx126x_2;}while(0);
 
 
-void init_io_spi_sx126x_x();
+void init_io_spi_sx126x_x(void);
 
 /*!
  * \brief HW Reset of the radio

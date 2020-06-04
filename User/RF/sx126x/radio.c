@@ -34,6 +34,43 @@
 extern SX126x_t *p_sx126x;
 
 
+
+#define TX_OUTPUT_POWER                             22        // dBm
+
+#define LORA_BANDWIDTH                              2         // [0: 125 kHz,
+                                                              //  1: 250 kHz,
+                                                              //  2: 500 kHz,
+                                                              //  3: Reserved]
+#define LORA_SPREADING_FACTOR                       5         // [SF7..SF12]
+#define LORA_CODINGRATE                             1         // [1: 4/5,
+                                                              //  2: 4/6,
+                                                              //  3: 4/7,
+                                                              //  4: 4/8]
+#define LORA_PREAMBLE_LENGTH                        12       // Same for Tx and Rx
+#define LORA_SYMBOL_TIMEOUT                         100       // Symbols
+#define LORA_FIX_LENGTH_PAYLOAD_ON                  False
+#define LORA_IQ_INVERSION_ON                        False
+#define LORA_FIX_LENGTH_PAYLOAD_LEN                 19
+
+
+#define LORA_FIX_LENGTH_PAYLOAD_OFF                  True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*!
  * \brief Initializes the radio
  *
@@ -465,7 +502,9 @@ static RadioEvents_t* RadioEvents;
  * Radio hardware and global parameters
  */
 SX126x_t SX126x;
-
+extern RadioEvents_t Radio_1_Events;
+extern RadioEvents_t Radio_2_Events;
+extern RadioStatus_t RadioStatus;
 /*!
  * Tx and Rx timers
  */
@@ -501,19 +540,40 @@ static uint8_t RadioGetFskBandwidthRegValue( uint32_t bandwidth )
 void RadioInit( RadioEvents_t *events )
 {
     RadioEvents = events;
-
+		
+		if(RadioEvents == &Radio_1_Events)
+		{
+			USE_RF_1
+			HAL_GPIO_WritePin(RF1_PWR_EN_GPIO_Port,RF1_PWR_EN_Pin,GPIO_PIN_SET);		
+		}
+		else
+		{
+			USE_RF_2
+			HAL_GPIO_WritePin(RF2_PWR_EN_GPIO_Port,RF2_PWR_EN_Pin,GPIO_PIN_SET);	
+			HAL_GPIO_WritePin(RF2_TX_EN_GPIO_Port,RF2_TX_EN_Pin,GPIO_PIN_SET);
+			HAL_GPIO_WritePin(RF2_RX_EN_GPIO_Port,RF2_RX_EN_Pin,GPIO_PIN_RESET);	
+		
+		}
+		
     SX126xInit( RadioOnDioIrq );
     SX126xSetStandby( STDBY_RC );
+		RadioStatus = SX126xGetStatus();
     SX126xSetRegulatorMode( USE_DCDC );
-
+		
     SX126xSetBufferBaseAddress( 0x00, 0x00 );
     SX126xSetTxParams( 22, RADIO_RAMP_200_US );
     SX126xSetDioIrqParams( IRQ_RADIO_ALL, IRQ_RADIO_ALL, IRQ_RADIO_NONE, IRQ_RADIO_NONE );
 
-    // Initialize driver timeout timers
-//    TimerInit( &TxTimeoutTimer, RadioOnTxTimeoutIrq );
-  //  TimerInit( &RxTimeoutTimer, RadioOnRxTimeoutIrq );
+		Radio.SetTxConfig(MODEM_LORA,TX_OUTPUT_POWER,0,LORA_BANDWIDTH,LORA_SPREADING_FACTOR,LORA_CODINGRATE,LORA_PREAMBLE_LENGTH,
+		False,True,0, 0, False, 3000 );
 
+		Radio.SetRxConfig( MODEM_LORA, LORA_BANDWIDTH, LORA_SPREADING_FACTOR,
+																		 LORA_CODINGRATE, 0, LORA_PREAMBLE_LENGTH,
+																		 LORA_SYMBOL_TIMEOUT, LORA_FIX_LENGTH_PAYLOAD_ON,
+																		 0, True, 0, 0, LORA_IQ_INVERSION_ON, True );		
+		
+		
+		
     IrqFired = False;
 }
 
@@ -563,8 +623,8 @@ void RadioSetChannel( uint32_t freq )
 bool RadioIsChannelFree( RadioModems_t modem, uint32_t freq, int16_t rssiThresh, uint32_t maxCarrierSenseTime )
 {
     bool status = True;
-    int16_t rssi = 0;
-    uint32_t carrierSenseTime = 0;
+//    int16_t rssi = 0;
+//    uint32_t carrierSenseTime = 0;
 
 //    RadioSetModem( modem );
 

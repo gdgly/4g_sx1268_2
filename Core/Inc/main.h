@@ -107,10 +107,10 @@ void Error_Handler(void);
 #define RF2_RX_EN_GPIO_Port GPIOC
 #define EN_1_8V_Pin GPIO_PIN_0
 #define EN_1_8V_GPIO_Port GPIOA
-#define RF1_PWR_EN_Pin GPIO_PIN_2
-#define RF1_PWR_EN_GPIO_Port GPIOH
-#define RF2_PWR_EN_Pin GPIO_PIN_3
+#define RF2_PWR_EN_Pin GPIO_PIN_2
 #define RF2_PWR_EN_GPIO_Port GPIOH
+#define RF1_PWR_EN_Pin GPIO_PIN_3
+#define RF1_PWR_EN_GPIO_Port GPIOH
 #define USB_KEY_IIC2_SCL_Pin GPIO_PIN_4
 #define USB_KEY_IIC2_SCL_GPIO_Port GPIOH
 #define USB_KEY_IIC2_SDA_Pin GPIO_PIN_5
