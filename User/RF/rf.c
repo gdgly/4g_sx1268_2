@@ -247,4 +247,26 @@ void OnCadDone2( bool channelActivityDetected)
 
 
 
+void task_rf_callback(void *argument)
+{
+	uint32_t notify_value;
+	#define BIT_RF1 (1)
+	#define BIT_RF2 (1<<1)
 
+	for(;;)
+	{
+		xTaskNotifyWait(0xffffffff,0xffffffff,&notify_value,pdMS_TO_TICKS(1000));
+		if(notify_value & BIT_RF1)
+		{
+			RadioIrqProcess(&Radio_1_Events);
+			continue;
+		}
+		if(notify_value & BIT_RF2)
+		{
+			RadioIrqProcess(&Radio_2_Events);			
+			continue;
+		}
+		//超时 处理
+
+	}
+}

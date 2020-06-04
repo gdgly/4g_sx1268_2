@@ -97,6 +97,15 @@ const osThreadAttr_t t4G_dclient_0_attributes = {
  
 extern void task_client_0(void *argument);
 
+osThreadId_t rf_callbackHandle;
+const osThreadAttr_t rf_callback_attributes = {
+  .name = "rf_callback",
+  .priority = (osPriority_t) osPriorityNormal1,
+  .stack_size = 512 * 4
+};
+ 
+extern void task_rf_callback(void *argument);
+
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -149,6 +158,8 @@ void MX_FREERTOS_Init(void) {
   t4G_data_sendHandle = osThreadNew(task_t4G_data_send, NULL, &t4G_data_send_attributes);	
 	
 	t4G_client_0Handle = osThreadNew(task_client_0, NULL, &t4G_dclient_0_attributes);	
+
+  rf_callbackHandle = osThreadNew(task_rf_callback, NULL, &rf_callback_attributes);	
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

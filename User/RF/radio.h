@@ -370,5 +370,5 @@ struct Radio_s
  *         board implementation
  */
 extern const struct Radio_s Radio;
-
+void RadioIrqProcess(  RadioEvents_t *events  );
 #endif // __RADIO_H__

@@ -336,10 +336,7 @@ void RadioSetPublicNetwork( bool enable );
  */
 uint32_t RadioGetWakeupTime( void );
 
-/*!
- * \brief Process radio irq
- */
-void RadioIrqProcess( void );
+
 
 /*!
  * \brief Sets the radio in reception mode with Max LNA gain for the given time
@@ -1132,13 +1129,11 @@ void RadioOnDioIrq( void )
     IrqFired = True;
 }
 
-void RadioIrqProcess( void )
+void RadioIrqProcess( RadioEvents_t *events )
 {
-    if( IrqFired == True )
+
     {
-        BoardDisableIrq( );
-        IrqFired = False;
-        BoardEnableIrq( );
+        RadioEvents = events;
 
         uint16_t irqRegs = SX126xGetIrqStatus( );
 
