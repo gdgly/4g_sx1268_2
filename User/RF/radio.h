@@ -339,7 +339,7 @@ struct Radio_s
     /*!
      * \brief Process radio irq
      */
-    void ( *IrqProcess )( void );
+    void ( *IrqProcess )( RadioEvents_t *events  );
     /*
      * The next functions are available only on SX126x radios.
      */

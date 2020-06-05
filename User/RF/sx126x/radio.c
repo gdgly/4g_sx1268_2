@@ -48,9 +48,9 @@ extern SX126x_t *p_sx126x;
                                                               //  4: 4/8]
 #define LORA_PREAMBLE_LENGTH                        12       // Same for Tx and Rx
 #define LORA_SYMBOL_TIMEOUT                         100       // Symbols
-#define LORA_FIX_LENGTH_PAYLOAD_ON                  False
+#define LORA_FIX_LENGTH_PAYLOAD_ON                  True
 #define LORA_IQ_INVERSION_ON                        False
-#define LORA_FIX_LENGTH_PAYLOAD_LEN                 19
+#define LORA_FIX_LENGTH_PAYLOAD_LEN                 10
 
 
 #define LORA_FIX_LENGTH_PAYLOAD_OFF                  True
@@ -562,12 +562,12 @@ void RadioInit( RadioEvents_t *events )
     SX126xSetDioIrqParams( IRQ_RADIO_ALL, IRQ_RADIO_ALL, IRQ_RADIO_NONE, IRQ_RADIO_NONE );
 
 		Radio.SetTxConfig(MODEM_LORA,TX_OUTPUT_POWER,0,LORA_BANDWIDTH,LORA_SPREADING_FACTOR,LORA_CODINGRATE,LORA_PREAMBLE_LENGTH,
-		False,True,0, 0, False, 3000 );
+		LORA_FIX_LENGTH_PAYLOAD_ON,True,0, 0, False, 3000 );
 
 		Radio.SetRxConfig( MODEM_LORA, LORA_BANDWIDTH, LORA_SPREADING_FACTOR,
 																		 LORA_CODINGRATE, 0, LORA_PREAMBLE_LENGTH,
 																		 LORA_SYMBOL_TIMEOUT, LORA_FIX_LENGTH_PAYLOAD_ON,
-																		 0, True, 0, 0, LORA_IQ_INVERSION_ON, True );		
+																		 LORA_FIX_LENGTH_PAYLOAD_LEN, True, 0, 0, LORA_IQ_INVERSION_ON, True );		
 		
 		
 		
@@ -958,13 +958,13 @@ void RadioSleep( void )
 
 void RadioStandby( void )
 {
-    SX126xSetStandby( STDBY_RC );
+  SX126xSetStandby( STDBY_RC );  	
 }
 
 void RadioRx( uint32_t timeout )
 {
-    SX126xSetDioIrqParams( IRQ_RADIO_ALL, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
-                           IRQ_RADIO_ALL, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
+    SX126xSetDioIrqParams( IRQ_RX_DONE, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
+                           IRQ_RX_DONE, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
                            IRQ_RADIO_NONE,
                            IRQ_RADIO_NONE );
 
@@ -1179,7 +1179,7 @@ void RadioIrqProcess( RadioEvents_t *events )
 
         if( ( irqRegs & IRQ_RX_TX_TIMEOUT ) == IRQ_RX_TX_TIMEOUT )
         {
-            if( SX126xGetOperatingMode( ) == MODE_TX )
+//            if( SX126xGetOperatingMode( ) == MODE_TX )
             {
 //                TimerStop( &TxTimeoutTimer );
                 if( ( RadioEvents != NULL ) && ( RadioEvents->TxTimeout != NULL ) )
@@ -1187,14 +1187,14 @@ void RadioIrqProcess( RadioEvents_t *events )
                     RadioEvents->TxTimeout( );
                 }
             }
-            else if( SX126xGetOperatingMode( ) == MODE_RX )
-            {
-                //TimerStop( &RxTimeoutTimer );
-                if( ( RadioEvents != NULL ) && ( RadioEvents->RxTimeout != NULL ) )
-                {
-                    RadioEvents->RxTimeout( );
-                }
-            }
+////            else if( SX126xGetOperatingMode( ) == MODE_RX )
+//            {
+//                //TimerStop( &RxTimeoutTimer );
+//                if( ( RadioEvents != NULL ) && ( RadioEvents->RxTimeout != NULL ) )
+//                {
+//                    RadioEvents->RxTimeout( );
+//                }
+//            }
         }
 
         if( ( irqRegs & IRQ_PREAMBLE_DETECTED ) == IRQ_PREAMBLE_DETECTED )

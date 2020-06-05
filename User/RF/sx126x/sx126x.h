@@ -176,9 +176,9 @@ typedef enum
     MODE_SLEEP                              = 0x00,         //! The radio is in sleep mode
     MODE_STDBY_RC,                                          //! The radio is in standby mode with RC oscillator
     MODE_STDBY_XOSC,                                        //! The radio is in standby mode with XOSC oscillator
-    MODE_FS,                                                //! The radio is in frequency synthesis mode
-    MODE_TX,                                                //! The radio is in transmit mode
-    MODE_RX,                                                //! The radio is in receive mode
+    MODE_FS = 4,                                                //! The radio is in frequency synthesis mode
+    MODE_TX = 6,                                                //! The radio is in transmit mode
+    MODE_RX = 5,                                                //! The radio is in receive mode
     MODE_RX_DC,                                             //! The radio is in receive duty cycle mode
     MODE_CAD                                                //! The radio is in channel activity detection mode
 }RadioOperatingModes_t;

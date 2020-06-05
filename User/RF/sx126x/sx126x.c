@@ -429,7 +429,7 @@ void SX126xSetRfFrequency( uint32_t frequency )
     uint8_t buf[4];
     uint32_t freq = 0;
 
-	  ImageCalibrated = True;
+	  ImageCalibrated = True; //进入的话会出错
     if( ImageCalibrated == False )
     {
         SX126xCalibrateImage( frequency );

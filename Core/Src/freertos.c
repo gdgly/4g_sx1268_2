@@ -100,7 +100,7 @@ extern void task_client_0(void *argument);
 osThreadId_t rf_callbackHandle;
 const osThreadAttr_t rf_callback_attributes = {
   .name = "rf_callback",
-  .priority = (osPriority_t) osPriorityNormal1,
+  .priority = (osPriority_t) osPriorityAboveNormal,
   .stack_size = 512 * 4
 };
  

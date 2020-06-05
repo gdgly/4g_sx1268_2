@@ -200,6 +200,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>gprs_receive_dma_buff</ItemText>
         </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>RadioPktStatus,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -256,6 +261,16 @@
           <count>10</count>
           <WinNumber>2</WinNumber>
           <ItemText>sx126x_1</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>RadioRxPayload</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>rf_status_manage,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>
