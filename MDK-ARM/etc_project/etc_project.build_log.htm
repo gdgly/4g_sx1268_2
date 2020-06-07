@@ -3,50 +3,53 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.26.2.0
-Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: nome nome, nome, LIC=6XJCX-HJVT2-ATS3F-68UQY-V8YHB-QTFEK
+IDE-Version: ¦ÌVision V5.30.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: nome Administrator, nome, LIC=IC9SB-2KQJI-EYAVT-RX5WE-8PH1H-74Z8H
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.26.2.0
+Toolchain:       MDK-ARM Professional  Version: 5.30.0.0
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
 Library Manager: ArmAr.exe V5.06 update 6 (build 750)
 Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
-CPU DLL:         SARMCM3.DLL V5.26.2.0
-Dialog DLL:      DCM.DLL V1.17.2.0
-Target DLL:      Segger\JL2CM3.dll V2.99.31.0
-Dialog DLL:      TCM.DLL V1.36.1.0
+CPU DLL:         SARMCM3.DLL V5.30.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      Segger\JL2CM3.dll V2.99.38.0
+Dialog DLL:      TCM.DLL V1.42.0.0
  
 <h2>Project:</h2>
-C:\work\500M_Prj\sx1268_prj_v1\MDK-ARM\etc_project.uvprojx
-Project File Date:  06/03/2020
+D:\HomeWork\500m_prj\4g_sx1268_2\MDK-ARM\etc_project.uvprojx
+Project File Date:  06/06/2020
 
 <h2>Output:</h2>
+  
+Warning: *** SUPPORT EXPIRED, NEW PRODUCT SERIAL NUMBER REQUIRED ***
+         *** Running with Code Size Limit: 32K                   ***
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'etc_project'
 compiling radio.c...
-..\User\RF\sx126x\radio.c(565): warning:  #188-D: enumerated type mixed with another type
+..\User\RF\sx126x\radio.c(571): warning:  #188-D: enumerated type mixed with another type
   		LORA_FIX_LENGTH_PAYLOAD_ON,True,0, 0, False, 3000 );
-..\User\RF\sx126x\radio.c(570): warning:  #188-D: enumerated type mixed with another type
+..\User\RF\sx126x\radio.c(576): warning:  #188-D: enumerated type mixed with another type
   																		 LORA_FIX_LENGTH_PAYLOAD_LEN, True, 0, 0, LORA_IQ_INVERSION_ON, True );		
-..\User\RF\sx126x\radio.c(1176): warning:  #188-D: enumerated type mixed with another type
+..\User\RF\sx126x\radio.c(1183): warning:  #188-D: enumerated type mixed with another type
                   RadioEvents->CadDone( ( ( irqRegs & IRQ_CAD_ACTIVITY_DETECTED ) == IRQ_CAD_ACTIVITY_DETECTED ) );
 ..\User\RF\sx126x\radio.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=55568 RO-data=1844 RW-data=1432 ZI-data=150272  
+Program Size: Code=55720 RO-data=1844 RW-data=1428 ZI-data=150276  
 FromELF: creating hex file...
-"etc_project\etc_project.axf" - 0 Error(s), 3 Warning(s).
+"etc_project\etc_project.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.4.0.pack
-                ARM.CMSIS.5.4.0
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
                 CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.1.2
+   * Component: CORE Version: 5.4.0
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.14.0.pack
@@ -55,13 +58,13 @@ Package Vendor: Keil
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_etc_project
-  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
-  C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  C:\Users\Administrator.SC-201906042026\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  C:\Users\Administrator.SC-201906042026\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.1.2
-Build Time Elapsed:  00:00:08
+   * Component: ARM::CMSIS:CORE:5.4.0
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

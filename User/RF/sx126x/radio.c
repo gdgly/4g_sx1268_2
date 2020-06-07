@@ -26,13 +26,19 @@
 #include "sx126x.h"
 #include "sx126x_hal.h"
 #include "radio.h"
+#include "rf.h"
 
+
+
+
+extern struct_rf_status_manage rf_status_manage[2];
 
 #define BoardDisableIrq( ) __disable_irq()
 #define BoardEnableIrq( ) __enable_irq()
 
 extern SX126x_t *p_sx126x;
-
+extern RadioEvents_t Radio_1_Events;
+extern RadioEvents_t Radio_2_Events;
 
 
 #define TX_OUTPUT_POWER                             22        // dBm
@@ -443,7 +449,7 @@ uint8_t MaxPayloadLength = 0xFF;
 uint32_t TxTimeout = 0;
 uint32_t RxTimeout = 0;
 
-bool RxContinuous = True;
+bool RxContinuous = False;
 
 
 PacketStatus_t RadioPktStatus;
@@ -555,7 +561,7 @@ void RadioInit( RadioEvents_t *events )
     SX126xInit( RadioOnDioIrq );
     SX126xSetStandby( STDBY_RC );
 		RadioStatus = SX126xGetStatus();
-    SX126xSetRegulatorMode( USE_DCDC );
+    //SX126xSetRegulatorMode( USE_DCDC );
 		
     SX126xSetBufferBaseAddress( 0x00, 0x00 );
     SX126xSetTxParams( 22, RADIO_RAMP_200_US );
@@ -963,8 +969,8 @@ void RadioStandby( void )
 
 void RadioRx( uint32_t timeout )
 {
-    SX126xSetDioIrqParams( IRQ_RX_DONE, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
-                           IRQ_RX_DONE, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
+    SX126xSetDioIrqParams( IRQ_RADIO_ALL, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
+                           IRQ_RADIO_ALL, //IRQ_RX_DONE | IRQ_RX_TX_TIMEOUT,
                            IRQ_RADIO_NONE,
                            IRQ_RADIO_NONE );
 
@@ -973,7 +979,7 @@ void RadioRx( uint32_t timeout )
     //    TimerSetValue( &RxTimeoutTimer, timeout );
    //     TimerStart( &RxTimeoutTimer );
     }
-
+		RxContinuous = False;
     if( RxContinuous == True )
     {
         SX126xSetRx( 0xFFFFFF ); // Rx Continuous
@@ -996,7 +1002,7 @@ void RadioRxBoosted( uint32_t timeout )
     //    TimerSetValue( &RxTimeoutTimer, timeout );
       //  TimerStart( &RxTimeoutTimer );
     }
-
+RxContinuous = False;
     if( RxContinuous == True )
     {
         SX126xSetRxBoosted( 0xFFFFFF ); // Rx Continuous
@@ -1131,7 +1137,8 @@ void RadioOnDioIrq( void )
 
 void RadioIrqProcess( RadioEvents_t *events )
 {
-
+	uint8_t rf_index;
+	
     {
         RadioEvents = events;
 
@@ -1179,22 +1186,29 @@ void RadioIrqProcess( RadioEvents_t *events )
 
         if( ( irqRegs & IRQ_RX_TX_TIMEOUT ) == IRQ_RX_TX_TIMEOUT )
         {
-//            if( SX126xGetOperatingMode( ) == MODE_TX )
-            {
+					if(RadioEvents == &Radio_1_Events)					
+					{
+						rf_index = 0;
+					}
+					else
+						rf_index = 1;
+					
+					if( 	rf_status_manage[rf_index].rf_work_status == 6)
+					{
 //                TimerStop( &TxTimeoutTimer );
-                if( ( RadioEvents != NULL ) && ( RadioEvents->TxTimeout != NULL ) )
-                {
-                    RadioEvents->TxTimeout( );
-                }
-            }
-////            else if( SX126xGetOperatingMode( ) == MODE_RX )
-//            {
-//                //TimerStop( &RxTimeoutTimer );
-//                if( ( RadioEvents != NULL ) && ( RadioEvents->RxTimeout != NULL ) )
-//                {
-//                    RadioEvents->RxTimeout( );
-//                }
-//            }
+							if( ( RadioEvents != NULL ) && ( RadioEvents->TxTimeout != NULL ) )
+							{
+									RadioEvents->TxTimeout( );
+							}
+					}
+					else if( rf_status_manage[rf_index].rf_work_status == 5)
+					{
+							//TimerStop( &RxTimeoutTimer );
+							if( ( RadioEvents != NULL ) && ( RadioEvents->RxTimeout != NULL ) )
+							{
+									RadioEvents->RxTimeout( );
+							}
+					}
         }
 
         if( ( irqRegs & IRQ_PREAMBLE_DETECTED ) == IRQ_PREAMBLE_DETECTED )
@@ -1204,7 +1218,8 @@ void RadioIrqProcess( RadioEvents_t *events )
 
         if( ( irqRegs & IRQ_SYNCWORD_VALID ) == IRQ_SYNCWORD_VALID )
         {
-            //__NOP( );
+            
+					RadioEvents = events;
         }
 
         if( ( irqRegs & IRQ_HEADER_VALID ) == IRQ_HEADER_VALID )

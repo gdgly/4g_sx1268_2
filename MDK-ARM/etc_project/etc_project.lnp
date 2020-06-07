@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp
+--cpu=Cortex-M4.fp.sp
 "etc_project\startup_stm32f429xx.o"
 "etc_project\main.o"
 "etc_project\gpio.o"
@@ -12,6 +12,14 @@
 "etc_project\stm32f4xx_it.o"
 "etc_project\stm32f4xx_hal_msp.o"
 "etc_project\stm32f4xx_hal_timebase_tim.o"
+"etc_project\system_stm32f4xx.o"
+"etc_project\radio.o"
+"etc_project\sx126x.o"
+"etc_project\sx126x_hal.o"
+"etc_project\rf.o"
+"etc_project\4g_app.o"
+"etc_project\4g_at_callback_func.o"
+"etc_project\uart_debug.o"
 "etc_project\stm32f4xx_hal_crc.o"
 "etc_project\stm32f4xx_hal_rcc.o"
 "etc_project\stm32f4xx_hal_rcc_ex.o"
@@ -34,7 +42,6 @@
 "etc_project\stm32f4xx_hal_tim.o"
 "etc_project\stm32f4xx_hal_tim_ex.o"
 "etc_project\stm32f4xx_hal_uart.o"
-"etc_project\system_stm32f4xx.o"
 "etc_project\croutine.o"
 "etc_project\event_groups.o"
 "etc_project\list.o"
@@ -45,13 +52,6 @@
 "etc_project\cmsis_os2.o"
 "etc_project\heap_4.o"
 "etc_project\port.o"
-"etc_project\radio.o"
-"etc_project\sx126x.o"
-"etc_project\sx126x_hal.o"
-"etc_project\rf.o"
-"etc_project\4g_app.o"
-"etc_project\4g_at_callback_func.o"
-"etc_project\uart_debug.o"
 --library_type=microlib --strict --scatter "etc_project\etc_project.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
